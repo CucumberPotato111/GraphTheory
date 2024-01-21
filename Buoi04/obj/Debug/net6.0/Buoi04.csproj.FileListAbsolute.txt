@@ -1,0 +1,15 @@
+B:\Homeworks\Code\Buoi04\obj\Debug\net6.0\Buoi04.csproj.AssemblyReference.cache
+B:\Homeworks\Code\Buoi04\obj\Debug\net6.0\Buoi04.GeneratedMSBuildEditorConfig.editorconfig
+B:\Homeworks\Code\Buoi04\obj\Debug\net6.0\Buoi04.AssemblyInfoInputs.cache
+B:\Homeworks\Code\Buoi04\obj\Debug\net6.0\Buoi04.AssemblyInfo.cs
+B:\Homeworks\Code\Buoi04\obj\Debug\net6.0\Buoi04.csproj.CoreCompileInputs.cache
+B:\Homeworks\Code\Buoi04\bin\Debug\net6.0\Buoi04.exe
+B:\Homeworks\Code\Buoi04\bin\Debug\net6.0\Buoi04.deps.json
+B:\Homeworks\Code\Buoi04\bin\Debug\net6.0\Buoi04.runtimeconfig.json
+B:\Homeworks\Code\Buoi04\bin\Debug\net6.0\Buoi04.dll
+B:\Homeworks\Code\Buoi04\bin\Debug\net6.0\Buoi04.pdb
+B:\Homeworks\Code\Buoi04\obj\Debug\net6.0\Buoi04.dll
+B:\Homeworks\Code\Buoi04\obj\Debug\net6.0\refint\Buoi04.dll
+B:\Homeworks\Code\Buoi04\obj\Debug\net6.0\Buoi04.pdb
+B:\Homeworks\Code\Buoi04\obj\Debug\net6.0\Buoi04.genruntimeconfig.cache
+B:\Homeworks\Code\Buoi04\obj\Debug\net6.0\ref\Buoi04.dll

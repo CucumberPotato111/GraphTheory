@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "2NgDCatv/lWGDbspsgE2bkBvK/gZRnntHFoPKy3B5tK0y+FwAmdJK99m2mT/woa8KyQlbgUF+cJ0H0OPHniPBQ==",
+  "success": true,
+  "projectFilePath": "B:\\Homeworks\\Code\\Buoi04\\Buoi04.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Automaton\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.19\\microsoft.windowsdesktop.app.ref.6.0.19.nupkg.sha512",
+    "C:\\Users\\Automaton\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.19\\microsoft.netcore.app.ref.6.0.19.nupkg.sha512",
+    "C:\\Users\\Automaton\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.19\\microsoft.aspnetcore.app.ref.6.0.19.nupkg.sha512",
+    "C:\\Users\\Automaton\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.19\\microsoft.netcore.app.host.win-x64.6.0.19.nupkg.sha512"
+  ],
+  "logs": []
+}
