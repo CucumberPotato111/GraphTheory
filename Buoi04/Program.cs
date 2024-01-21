@@ -6,7 +6,7 @@ namespace Buoi04
     {
         static void Main(string[] args)
         {
-            bai3();
+            bai4();
         }
     
         static void bai3()
@@ -115,24 +115,42 @@ namespace Buoi04
                             AdjList g = new AdjList();
                             g.FileToAdjList(filePath);
                             g.Output();
+                            g.Connected();
+                            int gInconnect1 = g.Inconnect;
                             Console.Write("  Nhập đỉnh cần xét x : ");
                             int x = int.Parse(Console.ReadLine());
-                            // Gọi phương thức BFS(x);
-                            g.BFS(x);
+                            g.RemoveEdgeX(x);
+                            g.Connected();
+                            int gInconnect2 = g.Inconnect;
+                            if (gInconnect2 > gInconnect1 + 1)
+                            {
+                                Console.WriteLine($"Đỉnh {x} là đỉnh khớp.");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Đỉnh {x} không phải là đỉnh khớp.");
+                            }
                             break;
                         }
                     case 2:
                         {
-                            string filePath = "..//..//..//TextFile//AdjList2.txt";
+                            string filePath = "..//..//..//TextFile//CutBridge.txt";
                             AdjList g = new AdjList();
                             g.FileToAdjList(filePath);
                             g.Output();
-                            Console.Write("  Nhập đỉnh xuất phát x : ");
+                            g.Connected();
+                            int gInconnect1 = g.Inconnect;
+                            Console.Write("  Nhập đỉnh x : ");
                             int x = int.Parse(Console.ReadLine());
-                            Console.Write("        Nhập đỉnh đến y : ");
+                            Console.Write("  Nhập đỉnh y : ");
                             int y = int.Parse(Console.ReadLine());
-                            // Gọi phương thức BFS_XtoY(x, y);
-                            g.BFS_XtoY(x, y);
+                            g.RemoveEdgeXY(x, y);
+                            g.Connected();
+                            int gInconnect2 = g.Inconnect;
+                            if (gInconnect2 > gInconnect1)
+                                Console.WriteLine("Cạnh ({0},{1}) là cạnh cầu", x, y);
+                            else
+                                Console.WriteLine("Cạnh ({0},{1}) không phải là cạnh cầu", x, y);
                             break;
                         }
                     case 3:

@@ -55,8 +55,8 @@ namespace Buoi04
             }
             sr.Close();
         }
-        // Xuất đồ thị
-        public void Output()
+       
+        public void Output() // Xuất đồ thị
         {
             Console.WriteLine("Đồ thị danh sách kề - số đỉnh : " + n);
             for (int i = 0; i < v.Length; i++)
@@ -66,7 +66,7 @@ namespace Buoi04
                     Console.Write("{0, 3}", x);
                 Console.WriteLine();
             }
-        }
+        } 
         public void BFS(int s)
         {
             // Initialize visited[] array
@@ -95,6 +95,65 @@ namespace Buoi04
                         visited[u] = true;
                         q.Enqueue(u);
                     }
+                }
+            }
+        }
+        public void BFS_XtoY(int x, int y)
+        {
+            // Initialize pre[] and set initial value: pre[i] = -1 for i = 0..<n
+            int[] pre = new int[v.Length];
+            for (int i = 0; i < v.Length; i++)
+                pre[i] = -1;
+
+            // Initialize visited[] and set value: visited[i] = false for i = 0..<n
+            bool[] visited = new bool[v.Length];
+            for (int i = 0; i < v.Length; i++)
+                visited[i] = false;
+
+            // Declare Queue
+            Queue<int> q = new Queue<int>();
+
+            // Mark the current node as visited and enqueue it
+            visited[x] = true;
+            q.Enqueue(x);
+
+            // Loop through the queue until it's empty
+            while (q.Count != 0)
+            {
+                // Dequeue a vertex from queue
+                int s = q.Dequeue();
+
+                // Get all adjacent vertices of the dequeued vertex s
+                // If an adjacent has not been visited, then mark it visited and enqueue it
+                // Also, set the parent of u to be s
+                foreach (int u in v[s])
+                {
+                    if (!visited[u])
+                    {
+                        visited[u] = true;
+                        q.Enqueue(u);
+                        pre[u] = s;
+                    }
+                }
+            }
+
+            // Print the path from x to y
+            Console.Write("Path from " + x + " -> " + y + " : " + x);
+            if (pre[y] != -1)
+            {
+                // Use a Stack to trace the path from y to x using the parent pointers
+                Stack<int> stk = new Stack<int>();
+                int k = y;
+                while (pre[k] != -1)
+                {
+                    stk.Push(k);
+                    k = pre[k];
+                }
+
+                while (stk.Count > 0)
+                {
+                    k = stk.Pop();
+                    Console.Write(" -> " + k);
                 }
             }
         }
@@ -175,72 +234,100 @@ namespace Buoi04
                 Console.WriteLine();
             }
         }
-
-
-
-        public void BFS_XtoY(int x, int y)
+        public void RemoveEdgeX(int x)
         {
-            // Initialize pre[] and set initial value: pre[i] = -1 for i = 0..<n
-            int[] pre = new int[v.Length];
+            // Iterate over each vertex i in the graph
             for (int i = 0; i < v.Length; i++)
-                pre[i] = -1;
-
-            // Initialize visited[] and set value: visited[i] = false for i = 0..<n
-            bool[] visited = new bool[v.Length];
-            for (int i = 0; i < v.Length; i++)
-                visited[i] = false;
-
-            // Declare Queue
-            Queue<int> q = new Queue<int>();
-
-            // Mark the current node as visited and enqueue it
-            visited[x] = true;
-            q.Enqueue(x);
-
-            // Loop through the queue until it's empty
-            while (q.Count != 0)
             {
-                // Dequeue a vertex from queue
-                int s = q.Dequeue();
-
-                // Get all adjacent vertices of the dequeued vertex s
-                // If an adjacent has not been visited, then mark it visited and enqueue it
-                // Also, set the parent of u to be s
-                foreach (int u in v[s])
+                // If i equals x, clear all elements in v[i]
+                if (i == x)
                 {
-                    if (!visited[u])
+                    v[i].Clear();
+                }
+                else
+                {
+                    // Otherwise, remove x from v[i]
+                    v[i].Remove(x);
+                }
+            }
+        }
+        public void RemoveEdgeXY(int x, int y)
+        {
+            v[x].Remove(y);
+            v[y].Remove(x);
+        }
+        public void GridToAdjList(string filePath)
+        {
+            // Read the grid from the file
+            // The grid is represented as a 2D array of integers
+            int[,] grid = File.ReadAllLines(filePath).Select(selector: line => line.Split(' ').Select(int.Parse).ToArray()).ToArray();
+
+            // Get the dimensions of the grid
+            int n = grid.GetLength(0);
+            int m = grid.GetLength(1);
+
+            // Convert the grid to an adjacency list representation of a graph
+            LinkedList<int>[] a = new LinkedList<int>[n * m];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    int k = i * m + j;
+                    a[k] = new LinkedList<int>();
+                    if (i > 0 && grid[i - 1, j] == 1) a[k].AddLast(k - m);
+                    if (i < n - 1 && grid[i + 1, j] == 1) a[k].AddLast(k + m);
+                    if (j > 0 && grid[i, j - 1] == 1) a[k].AddLast(k - 1);
+                    if (j < m - 1 && grid[i, j + 1] == 1) a[k].AddLast(k + 1);
+                }
+            }
+
+            // Find and print the shortest path from cell (x, y) to cell (col, col)
+            PathOnGrid(x, y, col, a);
+        }
+
+        public void PathOnGrid(int x, int y, int col, LinkedList<int>[] a)
+        {
+            // Use a breadth-first search to find the shortest path
+            Queue<int> queue = new Queue<int>();
+            bool[] visited = new bool[a.Length];
+            int[] parent = new int[a.Length];
+
+            queue.Enqueue(x);
+            visited[x] = true;
+
+            while (queue.Count > 0)
+            {
+                int u = queue.Dequeue();
+                foreach (var v in a[u])
+                {
+                    if (!visited[v])
                     {
-                        visited[u] = true;
-                        q.Enqueue(u);
-                        pre[u] = s;
+                        queue.Enqueue(v);
+                        visited[v] = true;
+                        parent[v] = u;
                     }
                 }
             }
 
-            // Print the path from x to y
-            Console.Write("Path from " + x + " -> " + y + " : " + x);
-            if (pre[y] != -1)
+            // Print the shortest path from cell (x, y) to cell (col, col)
+            if (parent[col] != -1)
             {
-                // Use a Stack to trace the path from y to x using the parent pointers
-                Stack<int> stk = new Stack<int>();
-                int k = y;
-                while (pre[k] != -1)
+                Stack<int> path = new Stack<int>();
+                for (int v = col; v != -1; v = parent[v])
                 {
-                    stk.Push(k);
-                    k = pre[k];
+                    path.Push(v);
                 }
-
-                while (stk.Count > 0)
+                while (path.Count > 0)
                 {
-                    k = stk.Pop();
-                    Console.Write(" -> " + k);
+                    Console.Write((path.Pop() / col) + ", " + (path.Pop() % col) + " ");
                 }
             }
+            else
+            {
+                Console.WriteLine("No path exists");
+            }
         }
-        public void RemoveEdgeX(int x)
-        {
 
-        }
 
     }
 }
